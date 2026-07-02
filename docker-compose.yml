@@ -1,0 +1,18 @@
+services:
+  runner1:
+    build:
+      context: .
+    environment:
+      - TOKEN=${TOKEN}
+
+  app-2:
+    build:
+      context: .
+    environment:
+      - TOKEN=${TOKEN}
+
+  app-3:
+    build:
+      context: .
+    environment:
+      - TOKEN=${TOKEN}
