@@ -1,7 +1,7 @@
 FROM              docker.io/redhat/ubi10
 RUN               curl -L -o /etc/yum.repos.d/hashi.repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
 RUN               curl -o /etc/yum.repos.d/docker.repo https://download.docker.com/linux/rhel/docker-ce.repo
-RUN               dnf install libicu make terraform docker-ce-cli unzip -y
+RUN               dnf install libicu make terraform docker-ce-cli unzip openssl -y
 RUN               curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /bin/kubectl && chmod +x /bin/kubectl
 # NODEJS
 RUN               dnf install nodejs24 nodejs24-npm -y
