@@ -8,9 +8,7 @@ RUN               dnf install nodejs24 nodejs24-npm -y
 # MAVEN
 RUN               dnf install maven -y
 # HELM
-RUN               curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-# HELM
-RUN               curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+RUN               curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
 
 # ARGOCD
 RUN               curl -sSL -o /bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64 && chmod +x /bin/argocd
