@@ -4,7 +4,7 @@ RUN               curl -o /etc/yum.repos.d/docker.repo https://download.docker.c
 RUN               dnf install libicu make terraform docker-ce-cli unzip -y
 RUN               curl -L "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" -o /bin/kubectl && chmod +x /bin/kubectl
 # NODEJS
-RUN               dnf module disable nodejs -y && dnf module enable nodejs:22 -y && dnf install nodejs npm -y
+RUN               dnf install nodejs24 nodejs24-npm -y
 # MAVEN
 RUN               dnf install maven -y
 # HELM
