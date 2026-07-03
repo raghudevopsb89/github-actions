@@ -3,7 +3,6 @@ services:
     build:
       context: .
     environment:
-      - TOKEN=${TOKEN}
       - RUNNER_NAME=runner1
     user: "1000:986"
     volumes:
@@ -13,7 +12,6 @@ services:
     build:
       context: .
     environment:
-      - TOKEN=${TOKEN}
       - RUNNER_NAME=runner2
     user: "1000:986"
     volumes:
@@ -23,7 +21,6 @@ services:
     build:
       context: .
     environment:
-      - TOKEN=${TOKEN}
       - RUNNER_NAME=runner3
     user: "1000:986"
     volumes:
