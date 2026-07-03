@@ -5,6 +5,9 @@ services:
     environment:
       - TOKEN=${TOKEN}
       - RUNNER_NAME=runner1
+    user: "1000:986"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   runner2:
     build:
@@ -12,6 +15,9 @@ services:
     environment:
       - TOKEN=${TOKEN}
       - RUNNER_NAME=runner2
+    user: "1000:986"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   runner3:
     build:
@@ -19,3 +25,6 @@ services:
     environment:
       - TOKEN=${TOKEN}
       - RUNNER_NAME=runner3
+    user: "1000:986"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
