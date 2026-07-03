@@ -4,6 +4,8 @@ services:
       context: .
     environment:
       - RUNNER_NAME=runner1
+    env_file:
+      - ./env
     user: "1000:986"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -13,6 +15,8 @@ services:
       context: .
     environment:
       - RUNNER_NAME=runner2
+    env_file:
+      - ./env
     user: "1000:986"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -22,6 +26,8 @@ services:
       context: .
     environment:
       - RUNNER_NAME=runner3
+    env_file:
+      - ./env
     user: "1000:986"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
