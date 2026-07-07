@@ -1,0 +1,80 @@
+name: CI Reusable
+on:
+  workflow_call:
+    inputs:
+      component_name:
+        required: true
+        type: string
+
+jobs:
+  build:
+    needs: test
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          make docker-build
+
+  publish:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v7
+      - run: make docker-push
+
+  dev-deploy:
+    needs: publish
+    runs-on: self-hosted
+    steps:
+      - name: Checkout helm repo
+        uses: actions/checkout@v7
+        with:
+          repository: raghudevopsb89/roboshop-helm-v1
+          path: helm
+      - run: |
+          cd helm
+          make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=dev
+
+  qa-deploy:
+    needs: dev-deploy
+    runs-on: self-hosted
+    environment: qa
+    steps:
+      - name: Checkout helm repo
+        uses: actions/checkout@v7
+        with:
+          repository: raghudevopsb89/roboshop-helm-v1
+          path: helm
+      - run: |
+          echo cd helm
+          echo make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=qa
+
+  uat-deploy:
+    needs: qa-deploy
+    runs-on: self-hosted
+    environment: uat
+    steps:
+      - name: Checkout helm repo
+        uses: actions/checkout@v7
+        with:
+          repository: raghudevopsb89/roboshop-helm-v1
+          path: helm
+      - run: |
+          echo cd helm
+          echo make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=uat
+
+  prod-deploy:
+    needs: uat-deploy
+    runs-on: self-hosted
+    environment: prod
+    steps:
+      - name: Checkout helm repo
+        uses: actions/checkout@v7
+        with:
+          repository: raghudevopsb89/roboshop-helm-v1
+          path: helm
+      - run: |
+          echo cd helm
+          echo make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=prod
+
+
