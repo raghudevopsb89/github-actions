@@ -14,8 +14,16 @@ jobs:
       - run: |
           make docker-build
 
-  publish:
+  scan:
+    runs-on: self-hosted
     needs: build
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          make docker-scan
+
+  publish:
+    needs: scan
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v7
