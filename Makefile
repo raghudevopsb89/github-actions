@@ -4,3 +4,6 @@ up:
 	docker compose up --build -d
 	docker compose logs -f
 
+image:
+	docker build -t docker.io/library/github-actions-runner .
+

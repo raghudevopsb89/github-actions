@@ -1,7 +1,8 @@
 services:
   runner1:
-    build:
-      context: .
+    image: docker.io/library/github-actions-runner
+#     build:
+#       context: .
     environment:
       - RUNNER_NAME=runner1
     env_file:
@@ -11,8 +12,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   runner2:
-    build:
-      context: .
+    image: docker.io/library/github-actions-runner
+#     build:
+#       context: .
     environment:
       - RUNNER_NAME=runner2
     env_file:
@@ -22,8 +24,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   runner3:
-    build:
-      context: .
+    image: docker.io/library/github-actions-runner
+#     build:
+#       context: .
     environment:
       - RUNNER_NAME=runner3
     env_file:
