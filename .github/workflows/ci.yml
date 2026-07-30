@@ -41,7 +41,9 @@ jobs:
       - run: |
           cd helm
           #make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=dev
-          echo argocd login argocd-dev.rdevopsb89.online --username admin --password $(kubectl get secret argocd-initial-admin-secret -o  jsonpath='{.data.password}' | base64 -d)  --insecure
+          pass=$(kubectl get secret argocd-initial-admin-secret -o  jsonpath='{.data.password}' | base64 -d)
+          echo $pass
+          echo argocd login argocd-dev.rdevopsb89.online --username admin --password   --insecure
           echo argocd app create ${{ inputs.component_name }} --repo https://github.com/raghudevopsb89/roboshop-helm-v1 --path . --dest-namespace roboshop --dest-server https://kubernetes.default.svc --helm-set github_sha=${GITHUB_SHA} --values values/${{ inputs.component_name }}.yml
 
   qa-deploy:
