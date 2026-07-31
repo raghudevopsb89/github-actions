@@ -45,7 +45,7 @@ jobs:
           az aks get-credentials --resource-group denmark-east-dev --name roboshop-dev --overwrite-existing
           pass=$(kubectl get secret argocd-initial-admin-secret -o  jsonpath='{.data.password}' | base64 -d)
           argocd login argocd-dev.rdevopsb89.online --username admin --password ${pass} --insecure
-          argocd app create ${{ inputs.component_name }} --repo https://github.com/raghudevopsb89/roboshop-helm-v1 --path . --dest-namespace roboshop --dest-server https://kubernetes.default.svc --helm-set github_sha=${GITHUB_SHA} --values values/${{ inputs.component_name }}.yml
+          argocd app create ${{ inputs.component_name }} --upsert --repo https://github.com/raghudevopsb89/roboshop-helm-v1 --path . --dest-namespace roboshop --dest-server https://kubernetes.default.svc --helm-set github_sha=${GITHUB_SHA} --values values/${{ inputs.component_name }}.yml
           argocd app sync ${{ inputs.component_name }}
 
   qa-deploy:
