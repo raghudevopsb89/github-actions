@@ -7,30 +7,30 @@ on:
         type: string
 
 jobs:
-  build:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v7
-      - run: |
-          make docker-build
-
-  scan:
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - uses: actions/checkout@v7
-      - run: |
-          echo make docker-scan
-
-  publish:
-    needs: scan
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v7
-      - run: make docker-push
+#   build:
+#     runs-on: self-hosted
+#     steps:
+#       - uses: actions/checkout@v7
+#       - run: |
+#           make docker-build
+#
+#   scan:
+#     runs-on: self-hosted
+#     needs: build
+#     steps:
+#       - uses: actions/checkout@v7
+#       - run: |
+#           echo make docker-scan
+#
+#   publish:
+#     needs: scan
+#     runs-on: self-hosted
+#     steps:
+#       - uses: actions/checkout@v7
+#       - run: make docker-push
 
   dev-deploy:
-    needs: publish
+    #needs: publish
     runs-on: self-hosted
     steps:
       - name: Checkout helm repo
