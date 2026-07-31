@@ -41,6 +41,7 @@ jobs:
       - run: |
           cd helm
           #make upgrade component_name=${{ inputs.component_name }} github_sha=${GITHUB_SHA} cluster_env=dev
+          az aks get-credentials --resource-group denmark-east-dev --name roboshop-dev --overwrite-existing
           pass=$(kubectl get secret argocd-initial-admin-secret -o  jsonpath='{.data.password}' | base64 -d)
           echo $pass
           echo argocd login argocd-dev.rdevopsb89.online --username admin --password   --insecure
